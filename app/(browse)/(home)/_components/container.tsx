@@ -27,5 +27,5 @@ export const Container = ({ children }: ContainerProps) => {
     >
       {children}
     </div>
-  );
+  ); 
 };
