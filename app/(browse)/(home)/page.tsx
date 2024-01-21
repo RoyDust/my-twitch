@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main className=" gap-y-4 flex flex-col">Home Page</main>;
+  return <main className=" flex flex-col gap-y-4">Home Page</main>;
 }

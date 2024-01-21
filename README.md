@@ -24,3 +24,4 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 1. 当移动端变化PC端时，如何做到自动切换
 2. 控制切换侧边栏的collapsed，可能因为服务端和客户端不一致，导致水合错误
+3. 项目权限使用的clerk,如何在结合数据进行存储
