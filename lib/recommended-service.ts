@@ -17,9 +17,25 @@ export const getRecommended = async () => {
   if (userId) {
     users = await db.user.findMany({
       where: {
-        NOT: {
-          id: userId,
-        },
+        // 使用AND来进行复杂查询
+        AND: [
+          // 排除自己
+          {
+            NOT: {
+              id: userId,
+            },
+          },
+          // 排除关注的人
+          {
+            NOT: {
+              followedBy: {
+                some: {
+                  followerId: userId,
+                },
+              },
+            },
+          },
+        ],
       },
       orderBy: {
         createdAt: "desc",
