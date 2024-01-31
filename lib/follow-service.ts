@@ -6,15 +6,25 @@ export const getFollowers = async () => {
     const self = await getSelf();
 
     const followedUser = await db.follow.findMany({
-      where: { followerId: self.id },
+      where: {
+        followerId: self.id,
+        // 排除已屏蔽的人
+        following: {
+          blocking: {
+            none: {
+              blockedId: self.id,
+            },
+          },
+        },
+      },
       include: {
         following: true,
       },
     });
 
     return followedUser;
-  } catch (error) {
-    throw new Error("User not found");
+  } catch {
+    return [];
   }
 };
 
@@ -57,8 +67,9 @@ export const followUser = async (id: string) => {
   if (!otherUser) {
     throw new Error("User not found");
   }
+
   if (otherUser.id === self.id) {
-    throw new Error("You can't follow yourself");
+    throw new Error("Cannot follow yourself");
   }
 
   const existingFollow = await db.follow.findFirst({
@@ -78,8 +89,8 @@ export const followUser = async (id: string) => {
       followingId: otherUser.id,
     },
     include: {
-      follower: true,
       following: true,
+      follower: true,
     },
   });
 

@@ -35,6 +35,16 @@ export const getRecommended = async () => {
               },
             },
           },
+          // 排除block屏蔽的人
+          {
+            NOT: {
+              blocking: {
+                some: {
+                  blockedId: userId,
+                },
+              },
+            },
+          },
         ],
       },
       orderBy: {
