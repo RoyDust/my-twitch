@@ -3,7 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { Fullscreen, KeyRound, MessageSquare, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { memo } from "react";
-import NavItem, { NavItemSkeleton } from "./nav-item";
+import { NavItem,NavItemSkeleton } from "./nav-item";
 
 const Navigation = () => {
   const pathname = usePathname();
