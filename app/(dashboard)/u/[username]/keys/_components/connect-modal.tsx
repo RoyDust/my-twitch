@@ -1,5 +1,12 @@
-"use client"
-import React, { memo } from "react";
+"use client";
+import React, {
+  ElementRef,
+  memo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
+import { IngressInput } from "livekit-server-sdk";
 import {
   Dialog,
   DialogClose,
@@ -18,8 +25,32 @@ import {
   SelectValue,
   SelectTrigger,
 } from "@/components/ui/select";
+import { createIngress } from "@/actions/ingress";
+import { toast } from "sonner";
+
+const RTMP = String(IngressInput.RTMP_INPUT);
+const WHIP = String(IngressInput.WHIP_INPUT);
+
+type IngressType = typeof RTMP | typeof WHIP;
 
 const ConnectModal = () => {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const [isPending, startTransition] = useTransition();
+  const [ingressType, setIngressType] = useState<IngressType>(RTMP);
+
+  const onSubmit = () => {
+    startTransition(() => {
+      createIngress(parseInt(ingressType))
+        .then((res) => {
+          toast.success("Successfully created ingress");
+          closeRef.current?.click();
+        })
+        .catch((err) => {
+          toast.error("Failed to create ingress");
+        });
+    });
+  };
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -31,18 +62,22 @@ const ConnectModal = () => {
           <DialogTitle>Generate connection</DialogTitle>
         </DialogHeader>
 
-        <Select>
+        <Select
+          disabled={isPending}
+          value={ingressType}
+          onValueChange={(value) => setIngressType(value)}
+        >
           <SelectTrigger className=" w-full">
             <SelectValue placeholder="Ingress Type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="RTMP">RTMP</SelectItem>
-            <SelectItem value="WHIP">WHIP</SelectItem>
+            <SelectItem value={RTMP}>RTMP</SelectItem>
+            <SelectItem value={WHIP}>WHIP</SelectItem>
           </SelectContent>
         </Select>
 
         <Alert>
-          <AlertTriangle className=" w-4 h-4" />
+          <AlertTriangle className=" h-4 w-4" />
           <AlertTitle>Warning!</AlertTitle>
           <AlertDescription>
             This action will reset all active streams using the current
@@ -50,15 +85,12 @@ const ConnectModal = () => {
           </AlertDescription>
         </Alert>
         <div className=" flex justify-between">
-          <DialogClose>
+          <DialogClose ref={closeRef} asChild>
             <Button variant="ghost">Cancel</Button>
           </DialogClose>
-          <Button
-            onClick={() => {
-              console.log("");
-            }}
-            variant="primary"
-          >Generate</Button>
+          <Button disabled={isPending} onClick={onSubmit} variant="primary">
+            Generate
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
