@@ -43,7 +43,7 @@ export const UserItem = ({ username, imageUrl, isLive }: UserItemProps) => {
             size="default"
             imageUrl={imageUrl}
             username={username}
-            isLive={false}
+            isLive={isLive}
             showBadge
           />
           {!collapsed && <p className=" truncate">{username}</p>}
