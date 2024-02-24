@@ -7,7 +7,8 @@ import { UserItem, UserItemSkeleton } from "./user-item";
 interface FollowingProps {
   data: (Follow & {
     following: User & {
-      stream: Stream | null;
+      // ! 这里是涉及到了网络安全问题，不能直接将 stream 暴露出去，只暴露需要的内容
+      stream: { isLive: boolean } | null;
     };
   })[];
 }
