@@ -7,6 +7,9 @@ import {
 } from "@livekit/components-react";
 import { ConnectionState, Track } from "livekit-client";
 import React, { memo } from "react";
+import { OfflineVideo } from "./offline-video";
+import { LoadingVideo } from "./loading-video";
+import { LiveVideo } from "./live-video";
 
 interface VideoProps {
   hostName: string;
@@ -24,11 +27,11 @@ const Video = ({ hostIdentity, hostName }: VideoProps) => {
   let content;
 
   if (!participant && connectionState === ConnectionState.Connected) {
-    content = <p>Host is offline</p>;
+    content = <OfflineVideo username={hostName} />;
   } else if (!participant && tracks.length === 0) {
-    content = <p>Loading...</p>;
+    content = <LoadingVideo label={connectionState} />;
   } else {
-    content = <p>Live video</p>;
+    content = <LiveVideo participant={participant} />;
   }
 
   return <div className=" group aspect-video relative border-b">{content}</div>;
