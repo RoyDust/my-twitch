@@ -12,6 +12,7 @@ interface CreatorPageProps {
 const CreatorPage = async ({ params }: CreatorPageProps) => {
   const externalUser = await currentUser();
 
+  // 获取当前浏览用户的用户信息
   const user = await getUserByUsername(params.username);
 
   if (!user || user.externalUserId !== externalUser?.id || !user.stream) {

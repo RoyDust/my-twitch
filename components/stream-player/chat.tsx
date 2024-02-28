@@ -11,6 +11,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { ChatHeader } from "./chat-header";
 import { ChatForm } from "./chat-form";
+import { ChatList } from "./chat-list";
 
 interface ChatProps {
   hostName: string;
@@ -38,6 +39,7 @@ export const Chat = ({
 
   const isOnline = participant && connectionState === ConnectionState.Connected;
 
+  // 隐藏聊天组件(当用户不在线时 || 聊天组件不可用时)
   const isHidden = !isChatEnabled || !isOnline;
 
   const [value, setValue] = useState("");
@@ -71,12 +73,13 @@ export const Chat = ({
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>
+          <ChatList messages={reversedMessages} isHidden={isHidden} />
           <ChatForm
             onSubmit={onSubmit}
             value={value}
             onChange={onChange}
             isHidden={isHidden}
-            isFollowingOnly={isChatFollowersOnly}
+            isFollowersOnly={isChatFollowersOnly}
             isDelayed={isChatDelayed}
             isFollowing={isFollowing}
           />

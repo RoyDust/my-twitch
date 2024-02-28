@@ -32,6 +32,9 @@ const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
           <ChatToggle />
         </div>
       )}
+      {
+        // ! 这个流播放器都包裹在liveKitRoom里面，为其所有子组件提供房间上下文
+      }
       <LiveKitRoom
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
