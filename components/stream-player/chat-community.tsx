@@ -26,6 +26,7 @@ export const ChatCommunity = ({
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce<string>(value, 500);
 
+  // 获取所有观众
   const participants = useParticipants();
 
   const onChange = (newValue: string) => {

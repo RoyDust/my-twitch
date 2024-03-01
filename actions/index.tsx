@@ -8,7 +8,7 @@ import { useChatSidebar } from "@/store/use-chat-sidebar";
 import { cn } from "@/lib/utils";
 import { Chat, ChatSkeleton } from "./chat";
 import { ChatToggle } from "./chat-toggle";
-import Header, { HeaderSkeleton } from "./header";
+import Header from "./header";
 
 interface StreamPlayerProps {
   user: User & {
@@ -30,7 +30,6 @@ const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
     <>
       {collapsed && (
         <div className=" fixed right-2 top-[100px] z-50  hidden lg:block">
-          <HeaderSkeleton />
           <ChatToggle />
         </div>
       )}
