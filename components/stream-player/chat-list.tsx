@@ -26,7 +26,7 @@ export const ChatList = ({ messages, isHidden }: ChatListProps) => {
   );
 };
 
-export const ChatSkeleton = () => {
+export const ChatListSkeleton = () => {
   return (
     <div className=" flex items-center justify-center flex-1">
       <Skeleton className=" w-1/2 h-6" />
