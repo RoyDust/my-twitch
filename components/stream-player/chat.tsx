@@ -84,6 +84,7 @@ export const Chat = ({
             isDelayed={isChatDelayed}
             isFollowing={isFollowing}
           />
+          
         </>
       )}
       {variant === ChatVariant.COMMUNITY && (

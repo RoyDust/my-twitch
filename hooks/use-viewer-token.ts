@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { JwtPayload, jwtDecode } from "jwt-decode";
+import { log } from "console";
 
 export const useViewerToken = (hostIdentity: string) => {
   const [token, setToken] = useState<string>("");
@@ -22,7 +23,7 @@ export const useViewerToken = (hostIdentity: string) => {
           name?: string;
         };
 
-        // console.log(decodedToken);
+        console.log(decodedToken);
         const name = decodedToken?.name;
 
         // ! 这里可能api发生变化了，没有jti字段
