@@ -52,7 +52,12 @@ const InfoCard = ({
             </h3>
             {thumbnailUrl && (
               <div className=" relative aspect-video w-[200px] overflow-hidden rounded-md border border-white/10">
-                <Image fill src={thumbnailUrl} alt={name} />
+                <Image
+                  fill
+                  src={thumbnailUrl}
+                  alt={name}
+                  className=" object-cover"
+                />
               </div>
             )}
           </div>
