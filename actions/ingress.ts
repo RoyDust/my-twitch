@@ -48,7 +48,7 @@ export const createIngress = async (ingressType: IngressInput) => {
   await resetIngresses(self.id);
 
   // 直播间配置
-  const options: CreateIngressOptions = {
+  const options: CreateIngressOptions & any = {
     name: self.username,
     roomName: self.id,
     participantName: self.username,

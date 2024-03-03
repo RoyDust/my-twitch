@@ -9,6 +9,7 @@ export default authMiddleware({
     "/",
     "/(api|trpc)(.*)",
     "/api/uploadthing",
+    "/:username",
   ],
   ignoredRoutes: ["/api/webhooks(.*)"],
 });
