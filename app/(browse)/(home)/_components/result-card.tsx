@@ -27,11 +27,6 @@ const ResultCard = ({ data }: ResultCardProps) => {
           isLive={data.isLive}
           username={data.user.username}
         />
-        {data.isLive && (
-          <div className=" left-2 top-2 group-hover:-translate-y-2 group-hover:translate-x-2 absolute transition-transform">
-            <LiveBadge />
-          </div>
-        )}
         <div className=" gap-x-3 flex">
           <UserAvatar
             username={data.user.username}
