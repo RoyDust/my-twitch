@@ -7,8 +7,13 @@ import Link from "next/link";
 import React, { memo } from "react";
 
 interface ResultCardProps {
-  data: Stream & {
+  data: {
     user: User;
+    id: string;
+    name: string;
+    isLive: boolean;
+    thumbnailUrl: string | null;
+    updatedAt: Date;
   };
 }
 
@@ -52,9 +57,9 @@ export const ResultCardSkeleton = () => {
         <ThumbnailSkeleton />
       </div>
       <div className=" space-y-2">
-        <Skeleton className=" w-32 h-4"/>
-        <Skeleton className=" w-24 h-3"/>
-        <Skeleton className=" w-12 h-3"/>
+        <Skeleton className=" w-32 h-4" />
+        <Skeleton className=" w-24 h-3" />
+        <Skeleton className=" w-12 h-3" />
       </div>
     </div>
   );
